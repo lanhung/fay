@@ -1,0 +1,39 @@
+{
+    "attribute": {
+        "age": "23",
+        "birth": "\u76d0\u57ce",
+        "constellation": "\u5929\u79e4\u5ea7",
+        "contact": "0515-88667778",
+        "gender": "\u5973",
+        "hobby": "\u56ed\u827a",
+        "job": "\u6570\u5b57\u4eba\u52a9\u7406",
+        "name": "\u519c\u519c",
+        "voice": "XIAO_XIAO",
+        "zodiac": "\u9f99"
+    },
+    "interact": {
+        "QnA": "",
+        "maxInteractTime": 15,
+        "perception": {
+            "chat": 5,
+            "follow": 5,
+            "gift": 5,
+            "indifferent": 5,
+            "join": 5
+        },
+        "playSound": true,
+        "visualization": true
+    },
+    "items": [],
+    "source": {
+        "liveRoom": {
+            "enabled": false,
+            "url": ""
+        },
+        "record": {
+            "device": "\u9ea6\u514b\u98ce (Realtek High Definition Au",
+            "enabled": false
+        },
+        "wake_word_enabled": false
+    }
+}

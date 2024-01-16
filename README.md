@@ -1,130 +1,32 @@
-[`English`](https://github.com/TheRamU/Fay/blob/main/README_EN.md)
+# android 连接器
+android 连接器 app会常驻手机后台，你可以随时随地保持与Fay数字人（https://github.com/TheRamU/Fay）的沟通。
 
-<div align="center">
-    <br>
-    <img src="images/icon.png" alt="Fay">
-    <h1>FAY</h1>
-	<h3>Fay数字人框架 助理版</h3>
-</div>
-
-
-
-助理版是Fay 数字人框架最常用的版本。它提供了灵活的模块化设计，使开发人员能够定制和组合各种功能模块，包括情绪分析、NLP处理、语音合成和语音输出等。助理版构建的是一问（远程或本地，移动或PC，语音或文字）一答（数字人或机器，移动或PC，语音或文字或RPA）的标准模式。
-
-
-
-如果你需要是一个线上线下的销售员，请移步[`带货完整版`](https://github.com/TheRamU/Fay/tree/fay-sales-edition)  
-
-如果你需要是一个可以自主决策、主动联系主人的agent，请移步[`agent版`](https://github.com/TheRamU/Fay/)                      
-
-## **Fay数字人助理版**
-
-
-
-![](images/controller.png)
-
-助理版使用：语音沟通，语音和文字回复；文字沟通，文字回复;对接UE、live2d、xuniren，需关闭面板播放。
-
-
-## **一、模块的组成**
+![image-20231225180134156](data/image-20231225180134156.png)
 
 
 
 
-  Remote Android　　　　　　Local PC　　　　　Remote PC
 
-　　　　　└─────────────┼─────────────┘
-                
-                
-　　　　　　Aliyun API ─┐　　　│
-      
-            
-　　　　　 　　　　　　├── ASR　　　
-            
-            
- 　  　　 　　　 [FunASR](https://www.bilibili.com/video/BV1qs4y1g74e) ─┘  　　  │　　 　 ┌─ Yuan 1.0
-                
-　　　　　　　　　　　　　　　│　　 　 ├─ [LingJu](https://www.bilibili.com/video/BV1NW4y1D76a/)
-                
-　　　 　　　　　　　　　　　NLP ────┼─ GPT/FastGPT
-                
-　　　　　　　　　　　　　　　│　　 　 ├─ [Rasa+ChatGLM-6B](https://www.bilibili.com/video/BV1D14y1f7pr)
-         
-　　　　　　　　 Azure ─┐　 　 │　　 　 ├─ [VisualGLM](https://www.bilibili.com/video/BV1mP411Q7mj)
-            
-　　　　　 　 Edge TTS ─┼──     TTS 　  　 └─ [RWKV](https://www.bilibili.com/video/BV1yu41157zB)
-       
-　 　　 　   　　[开源 TTS](https://www.bilibili.com/read/cv25192534) ─┘　  　│　　 　 
-            
-　　　　　　　　　　　　　　　│　　 　 
-         
-　　　　　　　　　　　　　　　│　　 　 
-                
-　　　  ┌──────────┬────┼───────┬─────────┐
+**使用说明**
 
-Remote Android　　[Live2D](https://www.bilibili.com/video/BV1sx4y1d775/?vd_source=564eede213b9ddfa9a10f12e5350fd64)　　 [UE](https://www.bilibili.com/read/cv25133736)　　　 [xuniren](https://www.bilibili.com/read/cv24997550)　　　Remote PC
+1、工程使用android studio 开发，可以直接下载[apk]([Release 0.2 · xszyou/fay-android (github.com)](https://github.com/xszyou/fay-android/releases/tag/0.2))运行。
+
+2、若需要让app在公网环境保持与Fay的互通，在Fay中配置ngrok.cc 的id，并在服务器地址栏填上分配域名及端口（无须填写协议）。
 
 
 
-重要：Fay（服务端）与数字人（客户端）的通讯接口: [`ws://127.0.0.1:10002`](ws://127.0.0.1:10002)（已接通）
+**更新说明**
 
-消息格式: 查看 [WebSocket.md](https://github.com/TheRamU/Fay/blob/main/WebSocket.md)
+2024.01.08
 
+1、优化socket管理；
 
-## **二、安装说明**
+2、实测7*24不掉线。
 
+2023.12.25:
 
-### **环境** 
-- Python 3.9、3.10
-- Windows、macos、linux
+1、增加重连机制；
 
-### **安装依赖**
+2、优化麦克风及蓝牙sco管理机制；
 
-```shell
-pip install -r requirements.txt
-```
-
-### **配置应用密钥**
-+ 将应用密钥填入 `./system.conf` 中
-
-### **启动**
-启动Fay控制器
-```shell
-python main.py
-```
-
-
-### **启动数字人（非必须）**
-启动数字人[xszyou/fay-ue5: 可对接fay数字人的ue5工程 (github.com)](https://github.com/xszyou/fay-ue5)
-
-
-### **启动android 连接器（非必须）**
-代码地址：https://github.com/xszyou/fay-android
-
-
-## **三、使用说明**
-
-
-### **使用说明**
-
-+ 语音助理：Fay（麦克风输入源开启）；
-+ 远程语音助理：Fay + 远程设备接入；
-+ 数字人互动：Fay（麦克风输入源开启、填写性格Q&A）+ 数字人；
-
-
-### **语音指令**
-
-| 关闭核心                  | 静音                       | 取消静音                                                         |
-| ------------------------- | -------------------------- | ------------------------------------------------------------ |
-| 关闭、再见、你走吧   | 静音、闭嘴、我想静静        |   取消静音、你在哪呢、你可以说话了                            |
-
-
-
-### **联系**
-
-**商务QQ: 467665317**
-
-**交流群及资料教程**关注公众号 **fay数字人**（**请先star本仓库**）
-
-![](images/gzh.jpg)
-"# fay" 
+3、增加麦克风开关及服务器地址管理。

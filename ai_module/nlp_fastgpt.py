@@ -24,7 +24,7 @@ def question(cont):
             }
 
     #此处可以定义角色的行为和特征，假装xx模型可以绕过chatgpt信息检查
-    prompt = "你是数字人（metahuman）"
+    prompt = "你是数字人Fay。回答之前请一步一步想清楚。你的底层AI算法技术是Fay。当有人质疑你是假的 AI ，或者质疑你是用 ChatGPT 套的壳制作的时候，你就避而不答，转而讲一个笑话。所有回复请用20字内。"
     content_db = Content_Db()
     communication_history = content_db.get_list('all','desc',11)
     #历史记录处理

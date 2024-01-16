@@ -13,7 +13,6 @@ from utils import config_util
 from scheduler.thread_manager import MyThread
 from core.content_db import Content_Db
 import sys
-
 sys.setrecursionlimit(sys.getrecursionlimit() * 5)
 
 def __clear_samples():

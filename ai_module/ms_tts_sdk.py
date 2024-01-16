@@ -3,7 +3,7 @@ import time
 import azure.cognitiveservices.speech as speechsdk
 import asyncio
 import sys
-sys.path.append("D:\\Fay-fay-assistant-edition")
+sys.path.append("E:\\GitHub\\Fay\\")
 from core import tts_voice
 from core.tts_voice import EnumVoice
 from utils import util, config_util
@@ -26,6 +26,7 @@ class Speech:
             self.ms_tts = True
         self.__connection = None
         self.__history_data = []
+
 
     def __get_history(self, voice_name, style, text):
         for data in self.__history_data:
@@ -113,7 +114,7 @@ if __name__ == '__main__':
     cfg.load_config()
     sp = Speech()
     sp.connect()
-    text = "我叫兰红数字人，测试音频tts，我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts我叫兰红数字人，测试音频tts"
+    text = "我叫Fay,我今年18岁，很年青。"
     s = sp.to_sample(text, "cheerful")
 
     print(s)

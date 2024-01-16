@@ -99,6 +99,7 @@ def determine_nlp_strategy(sendto,msg):
 def send_for_answer(msg,sendto):
         contentdb = Content_Db()
         contentdb.add_content('member','send',msg)
+        wsa_server.get_web_instance().add_cmd({"panelReply": {"type":"member","content":msg}})
         textlist = []
         text = None
         # 人设问答
@@ -129,8 +130,8 @@ class FeiFei:
     def __init__(self):
         pygame.mixer.init()
         self.q_msg = '你叫什么名字？'
-        self.a_msg = 'hi,我叫农农'
-        self.mood = 100.0 # 情绪值
+        self.a_msg = '您好，我是兰红数字人助理，有什么可以帮您'
+        self.mood = 100.0  # 情绪值
         self.old_mood = 100.0
         self.connect = False
         self.item_index = 0
@@ -216,7 +217,7 @@ class FeiFei:
                 return "NO_ANSWER"
                       
         if text == '唤醒':
-            return '您好，我是兰红数字人助理，有什么可以帮您？'
+            return '您好，我是兰红数字人助理，有什么可以帮您'
         
         # 人设问答
         keyword = qa_service.question('Persona',text)
@@ -392,7 +393,7 @@ class FeiFei:
             if len(self.a_msg) < 1:
                 self.speaking = False
             else:
-                util.printInfo(1, '农农', '({}) {}'.format(self.__get_mood_voice(), self.a_msg))
+                util.printInfo(1, '菲菲', '({}) {}'.format(self.__get_mood_voice(), self.a_msg))
                 if not config_util.config["interact"]["playSound"]: # 非展板播放
                     content = {'Topic': 'Unreal', 'Data': {'Key': 'text', 'Value': self.a_msg}}
                     wsa_server.get_instance().add_cmd(content)
@@ -462,6 +463,7 @@ class FeiFei:
                     util.log(1, "远程音频发送完成：{}".format(total))
                 except socket.error as serr:
                     util.log(1,"远程音频输入输出设备已经断开：{}".format(serr))
+                    wsa_server.get_web_instance().add_cmd({"remote_audio_connect": False}) 
                     
             time.sleep(audio_length + 0.5)
             wsa_server.get_web_instance().add_cmd({"panelMsg": ""})
@@ -481,6 +483,7 @@ class FeiFei:
                     self.deviceConnect.send(b'\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8')#发送心跳包
                 except Exception as serr:
                     util.log(1,"远程音频输入输出设备已经断开：{}".format(serr))
+                    wsa_server.get_web_instance().add_cmd({"remote_audio_connect": False})
                     self.deviceConnect = None
             time.sleep(1)
 
@@ -494,6 +497,7 @@ class FeiFei:
                 self.deviceConnect,addr=self.deviceSocket.accept()   #接受TCP连接，并返回新的套接字与IP地址
                 MyThread(target=self.__device_socket_keep_alive).start() # 开启心跳包检测
                 util.log(1,"远程音频输入输出设备连接上：{}".format(addr))
+                wsa_server.get_web_instance().add_cmd({"remote_audio_connect": True}) 
                 while self.deviceConnect: #只允许一个设备连接
                     time.sleep(1)
         except Exception as err:

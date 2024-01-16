@@ -14,7 +14,7 @@ communication_history = []
 
 def question(cont):
     if not yolov8.new_instance().get_status():
-        return "请先启动“ Eyes”"
+        return "请先启动“Fay Eyes”"
     content = {
         "text":cont,
         "history":communication_history}

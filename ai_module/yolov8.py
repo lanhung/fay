@@ -74,10 +74,6 @@ class FeiEyes:
             return None
     
     def start(self):
-        remote_camera_url = "rtsp://admin:1234qwer@192.168.0.98:554/stream"
-
-        # 打开远程摄像头
-        #cap = cv2.VideoCapture(remote_camera_url)
         cap = cv2.VideoCapture(0)
         if cap.isOpened():
             self.is_running = True
@@ -85,20 +81,6 @@ class FeiEyes:
 
     def stop(self):
         self.is_running = False
-    # def run(self, cap):
-    #     while self.is_running:
-    #         time.sleep(0.033)
-    #         ret, frame = cap.read()
-    #         self.img = frame
-    #         operated_frame = frame.copy()
-    #         if not ret:
-    #             break
-    #         # 在窗口中显示摄像头捕获的图像
-    #         cv2.imshow("Camera Feed", operated_frame)
-    #         cv2.waitKey(1)
-
-    #     cap.release()
-    #     cv2.destroyAllWindows()
 
     def run(self, cap):
          model = YOLO("yolov8n-pose.pt")
@@ -147,7 +129,7 @@ class FeiEyes:
             self.person_count = person_count
             self.sit_count = sit_count
             self.stand_count = stand_count
-            cv2.imshow("YOLO v8  Eyes", operated_frame)
+            cv2.imshow("YOLO v8 Fay Eyes", operated_frame)
             cv2.waitKey(1)
 
          cap.release()

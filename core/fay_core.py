@@ -130,9 +130,9 @@ class FeiFei:
     def __init__(self):
         pygame.mixer.init()
         self.q_msg = '你叫什么名字？'
-        self.a_msg = 'hi,我叫菲菲，英文名是fay'
-        self.mood = 0.0  # 情绪值
-        self.old_mood = 0.0
+        self.a_msg = '您好，我是兰红数字人助理，有什么可以帮您'
+        self.mood = 100.0  # 情绪值
+        self.old_mood = 100.0
         self.connect = False
         self.item_index = 0
         self.deviceSocket = None
@@ -217,7 +217,7 @@ class FeiFei:
                 return "NO_ANSWER"
                       
         if text == '唤醒':
-            return '您好，我是FAY智能助理，有什么可以帮您？'
+            return '您好，我是兰红数字人助理，有什么可以帮您'
         
         # 人设问答
         keyword = qa_service.question('Persona',text)
@@ -300,7 +300,7 @@ class FeiFei:
 
     def on_interact(self, interact: Interact):
         self.interactive.append(interact)
-        MyThread(target=self.__update_mood, args=[interact.interact_type]).start()
+        #MyThread(target=self.__update_mood, args=[interact.interact_type]).start()
         MyThread(target=storer.storage_live_interact, args=[interact]).start()
 
 
